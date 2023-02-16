@@ -1,0 +1,40 @@
+- hosts: webserver
+  become: yes
+  #become_user: centos
+  tasks:
+          - name: Install epel repo
+            package:
+               name: "epel-release"
+               state: present
+
+          - name: Install nginx
+            package:
+               name: "nginx"
+               state: present
+
+          - name: copy custom html
+            copy:
+               dest: "/usr/share/nginx/html/"
+               src: "/root/index.html"
+
+          - name: copy redirection rules conf file
+            copy:
+               dest: "/etc/nginx/conf.d/"
+               src: "/root/server.conf"
+
+          - name: copy server crt file
+            copy:
+               dest: "/etc/nginx/ssl/"
+               src: "/root/server.crt"
+
+          - name: copy server key file
+            copy:
+               dest: "/etc/nginx/ssl/"
+               src: "/root/server.key"
+
+
+          - name: Start nginx
+            service:
+               name: "nginx"
+               state: started
+               enabled: yes

@@ -1,0 +1,3 @@
+aws_id: "< aws user access key with valid permission to create ec2 and sg>"
+aws_key: "<aws user secret key with valid permission to create ec2 and sg>"
+aws_region: "<region-name>"
